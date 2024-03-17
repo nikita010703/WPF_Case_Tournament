@@ -1,0 +1,34 @@
+﻿<Window x:Class="Case_tournament_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Case_tournament_WPF"
+        mc:Ignorable="d"
+        Title="NPV Calculator" Height="230" Width="420" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="CustomErrorControlOnErrorStyle" TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="placeholder" />
+                            <TextBlock FontSize="11" FontStyle="Italic" Foreground="Red"
+                            Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid DataContext="{Binding Model}">
+        <Label Content="Последний год расчета:" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="yearTxtBox"  Text="{Binding Year, UpdateSourceTrigger=Default}" Style="{StaticResource CustomErrorControlOnErrorStyle}"  HorizontalAlignment="Left" Margin="160,17,0,0" TextWrapping="Wrap" Width="120" Height="22" VerticalAlignment="Top"/>
+        <Label Content="Ставка дисконтирования:" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding DiscountStake, UpdateSourceTrigger=Default}" Style="{StaticResource CustomErrorControlOnErrorStyle}" HorizontalAlignment="Left" Margin="160,55,0,0" TextWrapping="Wrap" Width="120" Height="22" VerticalAlignment="Top"/>
+        <Button x:Name="calculateBtn"  Content="Расчитать" HorizontalAlignment="Left" Margin="160,102,0,0" Width="120" Height="23" VerticalAlignment="Top"/>
+        <Label Content="NPV:" HorizontalAlignment="Left" Margin="111,146,0,0" FontSize="16" Width="45" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NPV, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" IsReadOnly="True" HorizontalAlignment="Left" Margin="161,151,0,0" TextWrapping="Wrap" Width="119" RenderTransformOrigin="0.513,0.566" Height="26" FontSize="16" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
