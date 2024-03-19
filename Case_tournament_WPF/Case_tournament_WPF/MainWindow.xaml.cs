@@ -42,7 +42,7 @@ namespace Case_tournament_WPF {
         private float discountStake = 0.2f;
         private double npv;
         private const int startYear = 2020;
-        private const int totalYears = 30;
+        private const int totalYears = 31;
         private readonly List<double> incomes;
         private readonly List<double> outcomes;
         private readonly List<double> netCashFlow;
@@ -90,7 +90,6 @@ namespace Case_tournament_WPF {
 
             Range outcome = ws.Range["C2:C32"];
             foreach (double cell in outcome.Value) {
-                //int tmp;
                 outcomes.Add((int)cell);
             }
 
@@ -98,8 +97,8 @@ namespace Case_tournament_WPF {
                 netCashFlow.Add(incomes[i] - outcomes[i]);
             }
 
-            double npv = netCashFlow[0] * (1 / (1 + discountStake));
-            for (int i = 1; i < year - startYear - 1; ++i) {
+            double npv = 0;
+            for (int i = 0; i <= year - startYear; ++i) {
                 npv += netCashFlow[i] * (1 / Math.Pow(1 + discountStake, i + 1));
             }
             NPV = npv;
